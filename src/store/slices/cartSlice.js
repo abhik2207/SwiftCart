@@ -9,10 +9,14 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart(state, action) {
-
+            state.cartItems.push(action.payload);
         },
         removeFromCart(state, action) {
-
+            let copyOfCart = [...state.cartItems];
+            copyOfCart = copyOfCart.filter((item) => item.id !== action.payload);
+            state.cartItems = copyOfCart;
+            
+            return state;
         }
     }
 });

@@ -10,8 +10,7 @@ export default async function ProductDetails({ params }) {
     const discountedPrice = product.price - (product.price * product.discountPercentage / 100);
 
     return (
-        <div className="w-full h-screen flex flex-col">
-            <Navbar />
+        <div className="w-full flex flex-col h-[92vh]">
             <div className="flex flex-1 px-32 bg-zinc-900">
                 <div className="flex flex-col justify-center p-4 h-full w-[40%]">
                     <div className="bg-zinc-800 rounded-xl">
@@ -27,7 +26,7 @@ export default async function ProductDetails({ params }) {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col h-full w-[60%] py-20 pl-4 relative">
+                <div className="flex flex-col h-full w-[60%] py-20 pl-4">
                     <h1 className="text-zinc-50 font-bold text-4xl">{product.title}</h1>
                     <h2 className="text-zinc-300 font-bold text-2xl mt-2">{product.brand || "Abhik's brand"}</h2>
 
@@ -43,13 +42,7 @@ export default async function ProductDetails({ params }) {
 
                     <p className="text-zinc-300 font-medium text-md text-justify">{product.description}</p>
 
-                    <AddToCartButton />
-
-                    <div className="absolute bottom-24 right-0">
-                        <Link href='/'>
-                            <Button variant='secondary'>Back</Button>
-                        </Link>
-                    </div>
+                    <AddToCartButton productItem={product} />
                 </div>
             </div>
         </div>
