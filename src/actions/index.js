@@ -1,5 +1,7 @@
 "use server";
 
+import { signIn, signOut } from "@/auth";
+
 // Get all products
 export const fetchAllProducts = async () => {
     try {
@@ -46,4 +48,12 @@ export const fetchProductDetails = async (productId) => {
             message: "Some error occured while fetching products!"
         }
     }
+}
+
+export const loginAction = async () => {
+    await signIn('github');
+}
+
+export const logoutAction = async () => {
+    await signOut();
 }

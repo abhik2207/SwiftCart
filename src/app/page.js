@@ -1,9 +1,17 @@
 import { fetchAllProducts } from "@/actions";
+import { auth } from "@/auth";
 import Navbar from "@/components/Navbar";
 import Product from "@/components/Product";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
   const allProducts = await fetchAllProducts();
+
+  const getSession = await auth();
+
+  if(!getSession?.user) {
+    redirect('/unauth-page');
+  }
 
   return (
     <div className="w-full min-h-screen bg-zinc-900 flex items-center justify-center flex-col">

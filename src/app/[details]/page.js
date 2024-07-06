@@ -1,13 +1,18 @@
 import { fetchProductDetails } from "@/actions";
+import { auth } from "@/auth";
 import AddToCartButton from "@/components/AddToCartButton";
-import Navbar from "@/components/Navbar";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function ProductDetails({ params }) {
     const productDetails = await fetchProductDetails(params.details);
     const product = productDetails.data;
     const discountedPrice = product.price - (product.price * product.discountPercentage / 100);
+
+    const getSession = await auth();
+
+    if (!getSession?.user) {
+        redirect('/unauth-page');
+    }
 
     return (
         <div className="w-full flex flex-col h-[92vh]">
